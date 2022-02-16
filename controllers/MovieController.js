@@ -58,6 +58,26 @@ MovieController.getNews = async (req, res) => {
     }
 }
 
+MovieController.getMovieById = async (req, res) => {
+    let sendId = req.query.criterio
+    try {
+        let result = await axios.get(`https://api.themoviedb.org/3/movie/${sendId}?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=es-ES`);
+        res.send(result.data);
+    } catch (error) {
+        res.send(error);
+    };
+};
+
+MovieController.getReviewById = async (req, res) => {
+    let sendId = req.query.criterio
+    try {
+        let result = await axios.get(`https://api.themoviedb.org/3/movie/${sendId}/reviews?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=es-ES&page=1`);
+        res.send(result.data);
+    } catch (error) {
+        res.send(error);
+    };
+};
+
 // MovieController.OpinionMovie = (req, res) => {
 
 // };

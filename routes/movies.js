@@ -19,6 +19,14 @@ router.get('/popular', MovieController.getPopularMovie);
 router.get('/top', MovieController.getTopMovie);
 //http://localhost:3000/movies/top
 
+//Mostrar peliculas por ID
+router.get('/', MovieController.getMovieById);
+//http://localhost:3000/movies
+
+//Mostrar reviews por ID
+router.get('/reviews', MovieController.getReviewById);
+//http://localhost:3000/movies/reviews
+
 //Borrar opinion
 // router.delete('/', MovieController.deleteOpinion);
 //https://localhost:3000/movies/
