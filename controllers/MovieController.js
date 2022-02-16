@@ -13,7 +13,7 @@ MovieController.getPlayingMovie = async (req, res) => {
         } catch (error) {
             res.send(error);
         };
-    };
+};
 
 MovieController.getPopularMovie = async (req, res) => {
     try {
