@@ -28,12 +28,12 @@ router.get('/reviews', MovieController.getReviewById);
 //http://localhost:3000/movies/reviews
 
 //Mostrar las ultimas peliculas
-
 router.get('/lastest', MovieController.getLastestMovie);
+//http://localhost:3000/movies/lastest
 
 //Mostrar peliculas similares a la pelicula mostrada por ID
-
 router.get('/similar', MovieController.getSimilarMovieById);
+//http://localhost:3000/movies/similar
 
 //Borrar opinion
 // router.delete('/', MovieController.deleteOpinion);
