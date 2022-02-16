@@ -23,4 +23,8 @@ router.get('/top', MovieController.getTopMovie);
 // router.delete('/', MovieController.deleteOpinion);
 //https://localhost:3000/movies/
 
+router.get('/title', MovieController.getTitleMovie)
+
+router.get('/news', MovieController.getNews);
+
 module.exports = router;
