@@ -26,7 +26,6 @@ MovieController.getPopularMovie = async (req, res) => {
 
 MovieController.getTopMovie = async (req, res) => {
     
-    
     try {
         let result = await axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=es-ES&page=1");
         res.send(result.data);
@@ -77,6 +76,28 @@ MovieController.getReviewById = async (req, res) => {
         res.send(error);
     };
 };
+
+
+MovieController.getLastestMovie = async (req, res) => {
+    try {
+        let result = await axios.get(`https://api.themoviedb.org/3/movie/latest?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=es-ES`);
+        res.send(result.data);
+    } catch (error) {
+        res.send(error);
+    };
+};
+
+
+MovieController.getSimilarMovieById = async (req, res) => {
+    let sendId = req.query.criterio
+    try {
+        let result = await axios.get(`https://api.themoviedb.org/3/movie/${sendId}/similar?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=es-ES&page=1`);
+        res.send(result.data);
+    } catch (error) {
+        res.send(error);
+    };
+};
+
 
 // MovieController.OpinionMovie = (req, res) => {
 
