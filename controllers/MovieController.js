@@ -35,7 +35,7 @@ MovieController.getTopMovie = async (req, res) => {
 };
 
 MovieController.getTitleMovie = async (req, res) => {
-    let search = req.query.criterio
+    let search = req.query.id
     try {
         let result = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US&query=${search}&page=1&include_adult=false`);
         res.send(result.data);
@@ -58,9 +58,9 @@ MovieController.getNews = async (req, res) => {
 }
 
 MovieController.getMovieById = async (req, res) => {
-    let sendId = req.query.criterio
+    let search = req.query.id
     try {
-        let result = await axios.get(`https://api.themoviedb.org/3/movie/${sendId}?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US`);
+        let result = await axios.get(`https://api.themoviedb.org/3/movie/${search}?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US`);
         res.send(result.data);
     } catch (error) {
         res.send(error);
@@ -68,9 +68,9 @@ MovieController.getMovieById = async (req, res) => {
 };
 
 MovieController.getReviewById = async (req, res) => {
-    let sendId = req.query.criterio
+    let search = req.query.id
     try {
-        let result = await axios.get(`https://api.themoviedb.org/3/movie/${sendId}/reviews?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US&page=1`);
+        let result = await axios.get(`https://api.themoviedb.org/3/movie/${search}/reviews?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US&page=1`);
         res.send(result.data);
     } catch (error) {
         res.send(error);
@@ -89,9 +89,9 @@ MovieController.getLastestMovie = async (req, res) => {
 
 
 MovieController.getSimilarMovieById = async (req, res) => {
-    let sendId = req.query.criterio
+    let search = req.query.id
     try {
-        let result = await axios.get(`https://api.themoviedb.org/3/movie/${sendId}/similar?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US&page=1`);
+        let result = await axios.get(`https://api.themoviedb.org/3/movie/${search}/similar?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US&page=1`);
         res.send(result.data);
     } catch (error) {
         res.send(error);
