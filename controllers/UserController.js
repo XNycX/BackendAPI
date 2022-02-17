@@ -1,102 +1,61 @@
 const UserController = {};
-// const members = [
-//     {
-//       id: 1,
-//       name: "John Doe",
-//       email: "john@gmail.com",
-//       status: "active",
-//     },
-//     {
-//       id: 2,
-//       name: "Bob Williams",
-//       email: "bob@gmail.com",
-//       status: "inactive",
-//     },
-//     {
-//       id: 3,
-//       name: "Shannon Jackson",
-//       email: "shannon@gmail.com",
-//       status: "active",
-//     },
-// ];
-  
-// //Funciones del controlador Usuarios
-// UserController.getAll = (req, res) => {
-//         res.json(members)
-// };
 
-// UserController.getUserById = (req, res) => {
-//     let found = members.some(member => member.id === +req.params.id)
+UsuarioController.getUser = (req, res) => {
+    //Búsqueda trayendo a todos los usuarios
+    Usuario.findAll()
+    .then(data => {
 
-//     if (found) {
-        
-//         res.json( members.filter(member => member.id === +req.params.id))
-//     }else{
-//         res.status(404).json({msg:`Miembro con el id ${req.params.id} no encontrado`})
-//     }
-//     console.log(members)
-// };
+        res.send(data)
+    });
 
-// UserController.register = (req, res) => {
-//     console.log(req.body)
-//     const newMember = {
-//         id: members.length + 1,
-//         name: req.body.name,
-//         email: req.body.email,
-//         status: "active",
-//     }
-//     if(!req.body.name || !req.body.email){
-//         res.status(400).json({msg:'Por favor rellene su nombre o correo'})
-//     }
-//     members.push(newMember)
-//     res.json(members)
-// };
+};
 
-// UserController.update = (req, res) => {
-//     const found = members.some(member => member.id === +req.params.id)
+UsuarioController.getUserById = (req, res) => {
+    //Búsqueda buscando una Id
+    Usuario.findByPk(req.params.id)
+    .then(data => {
+        res.send(data)
+    });
+};
 
-//     if(found){
-//        members.forEach(member =>{
-//            if(member.id === +req.params.id){
-//                member.name = req.body.name ? req.body.name: member.name,
-//                member.email = req.body.email ? req.body.email : member.email
+UsuarioController.getUserByEmail = (req, res) => {
+    //Búsqueda comparando un campo
+    Usuario.findOne({ where : { email : req.params.email }})
+    .then(data => {
+        res.send(data)
+    });
+}
 
-//             res.json(member)
-//            }
-//        })
-//     }else{
-//         res.status(404).json({msg:`Miembro con el id ${req.params.id} no encontrado`})
-//     }
+UsuarioController.postUser = async (req, res) => {
 
-// };
-
-// UserController.delete = (req, res) => {
-//     const found = members.some( member=> member.id === +req.params.id)
-
-//     if(found){
-//         res.json( members.filter(member=> member.id !== +req.params.id))
-//     }else{
-//         res.status(404).json({msg:`Miembro con el id ${req.params.id} no encontrado`})
-//     }
-// }
-
-
-UserController.register = (req, res) => {
-
+    //Registrando un usuario
+    
     try {
-        
-     let nombre = req.body.name;
-     let age = req.body.age;
-     let hobbie = req.body.hobbies;
 
-     console.log(req.body)
+        let name = req.body.name;
+        let age = req.body.age;
+        let surname = req.body.surname;
+        let nickname = req.body.nickname;
+        let email = req.body.email;
 
-     res.send({nombre,age,hobbie});
+        //Comprobación de errores.....
 
+        //Guardamos en sequelize el usuario
+
+        Usuario.create({
+            name: name,
+            age: age,
+            surname: surname,
+            email: email,
+            nickname: nickname
+        }).then(usuario => {
+            console.log("este es mi amigo", usuario);
+            res.send(`${usuario.name}, bienvenida a este infierno`);
+        });
 
     } catch (error) {
         res.send(error);
     }
-
+    
 };
 module.exports = UserController;

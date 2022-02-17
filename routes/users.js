@@ -8,11 +8,23 @@ const UserController = require('../controllers/UserController');
 // router.get('/', UserController.getAll);
 
 // //Mostrar usuarios por ID
-// router.get('/:id', UserController.getUserById);
+//Leer todos los usuarios
+router.get('/', UserController.getUser);
 //http://localhost:3000/usuarios
 
+router.get('/:id', UserController.getUserById);
+
+router.get('/email/:email', UserController.getUserByEmail);
+
+//Registro
+router.post('/', UserController.postUser);
+//http://localhost:3000/usuarios
+
+//Login
+// router.post('/login', UserController.logUsuario);
+//https://localhost:3000/usuarios/login
 //Registrar usuario
-router.post('/', UserController.register);
+// router.post('/', UserController.register);
 //http://localhost:3000/usuarios
 
 //Modificar usuario por ID
