@@ -55,7 +55,7 @@ MovieController.getNews = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 MovieController.getMovieById = async (req, res) => {
     let search = req.query.id
@@ -77,7 +77,6 @@ MovieController.getReviewById = async (req, res) => {
     };
 };
 
-
 MovieController.getLastestMovie = async (req, res) => {
     try {
         let result = await axios.get(`https://api.themoviedb.org/3/movie/latest?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US`);
@@ -86,7 +85,6 @@ MovieController.getLastestMovie = async (req, res) => {
         res.send(error);
     };
 };
-
 
 MovieController.getSimilarMovieById = async (req, res) => {
     let search = req.query.id
