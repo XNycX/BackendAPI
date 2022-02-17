@@ -129,7 +129,7 @@ MovieController.postMovie = async (req, res) => {
 
         let title = req.body.title;
         let overview = req.body.overview;
-        let adult = req.body.adult;
+        let gender = req.body.gender;
         let popularity = req.body.popularity;
         let img = req.body.img;
         let release_date = req.body.release_date;
@@ -141,7 +141,7 @@ MovieController.postMovie = async (req, res) => {
         Movie.create({
             title: title,
             overview: overview,
-            adult: adult,
+            gender: gender,
             popularity: popularity,
             img: img,
             release_date: release_date

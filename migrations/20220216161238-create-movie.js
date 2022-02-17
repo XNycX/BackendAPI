@@ -14,8 +14,8 @@ module.exports = {
       overview: {
         type: Sequelize.STRING
       },
-      adult: {
-        type: Sequelize.BOOLEAN
+      gender: {
+        type: Sequelize.STRING
       },
       popularity: {
         type: Sequelize.FLOAT
