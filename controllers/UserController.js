@@ -33,10 +33,11 @@ UsuarioController.postUser = async (req, res) => {
     try {
 
         let name = req.body.name;
-        let age = req.body.age;
         let surname = req.body.surname;
-        let nickname = req.body.nickname;
         let email = req.body.email;
+        let direction = req.body.direction;
+        let pay_method = req.body.pay_method;
+        let telephone = req.body.telephone;
 
         //Comprobación de errores.....
 
@@ -44,10 +45,11 @@ UsuarioController.postUser = async (req, res) => {
 
         Usuario.create({
             name: name,
-            age: age,
             surname: surname,
             email: email,
-            nickname: nickname
+            pay_method: pay_method,
+            direction: direction,
+            telephone: telephone
         }).then(usuario => {
             console.log("este es mi amigo", usuario);
             res.send(`${usuario.name}, bienvenida a este infierno`);
