@@ -3,7 +3,6 @@ const MovieController = require('../controllers/MovieController');
 const router = express.Router();
 //CRUD RESTFUL
 
-
 // //Mostrar usuarios por ID
 //Leer todos los usuarios
 router.get('/', MovieController.getMovie);
