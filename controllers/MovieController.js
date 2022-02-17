@@ -1,3 +1,5 @@
+const { Movie } = require('../models/index');
+const movie = require('../models/movie');
 const MovieController = {};
 
 MovieController.getMovie = (req, res) => {
@@ -29,15 +31,14 @@ MovieController.getMovieByEmail = (req, res) => {
         });
 };
 
-MovieController.postMovie = async (req, res) => {
+MovieController.create = async (req, res) => {
  //Registrando un Movie
     try {
-    
         Movie.create({
             ...req.body
         }).then(Movie => {
             console.log("esta es la pelicula", Movie);
-            res.send(`${usuario.name}, se ha añadido correctamente`);
+            res.send(`${Movie.title}, se ha añadido correctamente`);
         });
 
     } catch (error) {

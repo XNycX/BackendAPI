@@ -1,8 +1,10 @@
+const { User } = require('../models/index');
 const UserController = {};
+const bcrypt = require('bcryptjs');
 
-UsuarioController.getUser = (req, res) => {
+UserController.getUser = (req, res) => {
     //Búsqueda trayendo a todos los usuarios
-    Usuario.findAll()
+    User.findAll()
         .then(data => {
 
             res.send(data)
@@ -10,39 +12,42 @@ UsuarioController.getUser = (req, res) => {
 
 };
 
-UsuarioController.getUserById = (req, res) => {
+UserController.getUserById = (req, res) => {
     //Búsqueda buscando una Id
-    Usuario.findByPk(req.params.id)
+    User.findByPk(req.params.id)
         .then(data => {
             res.send(data)
         });
 };
 
-UsuarioController.getUserByEmail = (req, res) => {
+UserController.getUserByEmail = (req, res) => {
     //Búsqueda comparando un campo
-    Usuario.findOne({
-            where: {
-                email: req.params.email
-            }
-        })
+    User.findOne({
+        where: {
+            email: req.params.email
+        }
+    })
         .then(data => {
             res.send(data)
         });
-}
+};
 
-UsuarioController.postUser = async (req, res) => {
-
+UserController.register = async (req, res) => {
     try {
-
-        Usuario.create({
-            ...req.body
-        }).then(usuario => {
-            console.log("este es mi amigo", usuario);
-            res.send(`${usuario.name}, bienvenida a este infierno`);
-        });
-
+       const hash = await bcrypt.hash(req.body.password,10)
+       const user = await User.create({ ...req.body,password:hash })
+        res.send(`${user.name}, bienvenid@ a este infierno`);
     } catch (error) {
         res.send(error);
     }
 };
+// UserController.register = (req, res) => {
+//     User.create({ ...req.body }).then(user => {
+//         console.log("este es mi amigo", user);
+//         res.send(`${user.name}, bienvenida a este infierno`);
+//     }).catch(err => {
+//         console.error(err)
+//         res.send(err)
+//     })
+// };
 module.exports = UserController;

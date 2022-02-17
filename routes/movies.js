@@ -13,7 +13,7 @@ router.get('/:id', MovieController.getMovieById);
 router.get('/email/:email', MovieController.getMovieByEmail);
 
 //Registro
-router.post('/', MovieController.postMovie);
+router.post('/', MovieController.create);
 
 
 

@@ -17,7 +17,7 @@ router.get('/:id', UserController.getUserById);
 router.get('/email/:email', UserController.getUserByEmail);
 
 //Registro
-router.post('/', UserController.postUser);
+router.post('/', UserController.register);
 //http://localhost:3000/usuarios
 
 //Login
