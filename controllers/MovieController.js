@@ -1,5 +1,4 @@
 const { Movie } = require('../models/index');
-const movie = require('../models/movie');
 const MovieController = {};
 
 MovieController.getMovie = (req, res) => {
@@ -19,11 +18,11 @@ MovieController.getMovieById = (req, res) => {
         });
 };
 
-MovieController.getMovieByEmail = (req, res) => {
+MovieController.getMovieByGender = (req, res) => {
     //Búsqueda comparando un campo
     Movie.findOne({
         where: {
-            email: req.params.email
+            gender: req.params.gender
         }
     })
         .then(data => {

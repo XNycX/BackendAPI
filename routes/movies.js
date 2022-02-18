@@ -10,7 +10,7 @@ router.get('/', MovieController.getMovie);
 
 router.get('/:id', MovieController.getMovieById);
 
-router.get('/email/:email', MovieController.getMovieByEmail);
+router.get('/gender/:gender', MovieController.getMovieByGender);
 
 //Registro
 router.post('/', MovieController.create);
