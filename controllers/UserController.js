@@ -6,7 +6,6 @@ UserController.getUser = (req, res) => {
     //Búsqueda trayendo a todos los usuarios
     User.findAll()
         .then(data => {
-
             res.send(data)
         });
 
@@ -41,6 +40,35 @@ UserController.register = async (req, res) => {
         res.send(error);
     }
 };
+
+
+UserController.deleteAll = async (req, res) => {
+
+    try {
+        const user = await User.destroy({
+            where: {},
+            truncate:false
+        })
+            res.send(`Se han eliminado ${user.name}`) 
+    } catch (error) {
+        res.send(error)
+    }
+};
+
+UserController.delete = async (req, res) => {
+    let id = req.params.id
+    
+    try {
+        const user = await User.destroy({
+            where: {id:id},
+            truncate:false
+        })
+            res.send(`Se han eliminado ${id}`) 
+    } catch (error) {
+        res.send(error)
+    }
+};
+
 // UserController.register = (req, res) => {
 //     User.create({ ...req.body }).then(user => {
 //         console.log("este es mi amigo", user);

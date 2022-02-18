@@ -30,9 +30,9 @@ router.post('/', UserController.register);
 //Modificar usuario por ID
 // router.put('/:id', UserController.update);
 // //https://localhost:3000/usuarios
-
+router.delete('/', UserController.deleteAll);
 // //Borrar usuario por ID
-// router.delete('/:id', UserController.delete);
+router.delete('/:id', UserController.delete);
 //https://localhost:3000/usuarios
 
 module.exports = router;
