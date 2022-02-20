@@ -2,6 +2,9 @@ const { User } = require('../models/index');
 const UserController = {};
 const bcrypt = require('bcryptjs');
 const authConfig = require('../config/auth');
+const jwt = require('jsonwebtoken');
+const { jwt_secret } = require('../config/config.json')['development'];
+
 
 UserController.getUser = (req, res) => {
     //Búsqueda trayendo a todos los usuarios
@@ -9,7 +12,6 @@ UserController.getUser = (req, res) => {
         .then(data => {
             res.send(data)
         });
-
 };
 
 UserController.getUserById = (req, res) => {
@@ -56,7 +58,8 @@ UserController.login = (req, res) => {
         if(!isMatch){
             return res.status(400).send({message:"Usuario o contraseña incorrectos"})
         }
-        res.send(user)
+        token = jwt.sign({ id: user.id }, jwt_secret),
+            res.send({ message: `Bienvenid@ ${user.name}, ${user} , ${token}` });
     })
 },
 
