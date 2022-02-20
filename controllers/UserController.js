@@ -1,6 +1,7 @@
 const { User } = require('../models/index');
 const UserController = {};
 const bcrypt = require('bcryptjs');
+const authConfig = require('../config/auth');
 
 UserController.getUser = (req, res) => {
     //Búsqueda trayendo a todos los usuarios
@@ -33,12 +34,33 @@ UserController.getUserByEmail = (req, res) => {
 
 UserController.register = async (req, res) => {
     try {
-       const hash = await bcrypt.hash(req.body.password,10)
+       const hash = await bcrypt.hash(req.body.password,Number.parseInt(authConfig.rounds))
        const user = await User.create({ ...req.body,password:hash })
         res.send(`${user.name}, bienvenid@ a este infierno`);
     } catch (error) {
         res.send(error);
     }
+};
+
+UserController.update = async (req, res) => {
+
+    let data = req.body;
+
+    let id = req.params.id;
+
+    try {
+
+        User.update(data, {
+            where: {id : id}
+        })
+        .then(updated => {
+            res.send(updated);
+        });
+
+    } catch (error) {
+
+    }
+
 };
 
 
@@ -55,7 +77,7 @@ UserController.deleteAll = async (req, res) => {
     }
 };
 
-UserController.delete = async (req, res) => {
+UserController.deleteById = async (req, res) => {
     let id = req.params.id
     
     try {
