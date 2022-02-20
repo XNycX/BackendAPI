@@ -34,13 +34,31 @@ UserController.getUserByEmail = (req, res) => {
 
 UserController.register = async (req, res) => {
     try {
-       const hash = await bcrypt.hash(req.body.password,Number.parseInt(authConfig.rounds))
+       const hash = bcrypt.hashSync(req.body.password,Number.parseInt(authConfig.rounds))
        const user = await User.create({ ...req.body,password:hash })
         res.send(`${user.name}, bienvenid@ a este infierno`);
     } catch (error) {
         res.send(error);
     }
 };
+
+UserController.login = (req, res) => {
+
+    User.findOne({
+        where:{
+            email:req.body.email
+        }
+    }).then(user=>{
+        if(!user){
+            return res.status(400).send({message:"Usuario o contraseña incorrectos"})
+        }
+        const isMatch = bcrypt.compareSync(req.body.password, user.password);
+        if(!isMatch){
+            return res.status(400).send({message:"Usuario o contraseña incorrectos"})
+        }
+        res.send(user)
+    })
+},
 
 UserController.update = async (req, res) => {
 
@@ -60,9 +78,7 @@ UserController.update = async (req, res) => {
     } catch (error) {
 
     }
-
 };
-
 
 UserController.deleteAll = async (req, res) => {
 
