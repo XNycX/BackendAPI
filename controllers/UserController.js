@@ -8,25 +8,20 @@ const { Op} = Sequelize;
 
 
 UserController.getUser = (req, res) => {
-    if (req.User.user.rol === "admin") {
         User.findAll()
             .then(data => {
                 res.send(data)
             });
-    };
 };
 
 UserController.getUserById = (req, res) => {
-    if (req.User.user.rol === "admin") {
         User.findByPk(req.params.id)
             .then(data => {
                 res.send(data)
             });
-    };
 };
 
 UserController.getUserByEmail = (req, res) => {
-    if (req.User.user.rol === "admin") {
         User.findOne({
             where: {
                 email: req.params.email
@@ -35,7 +30,6 @@ UserController.getUserByEmail = (req, res) => {
             .then(data => {
                 res.send(data)
             });
-    };
 };
 
 UserController.register = async (req, res) => {
@@ -51,7 +45,6 @@ UserController.register = async (req, res) => {
 };
 
 UserController.login = (req, res) => {
-
     User.findOne({
         where: {
             email: req.body.email
@@ -73,7 +66,6 @@ UserController.login = (req, res) => {
 },
 
     UserController.update = async (req, res) => {
-        if (req.User.user.rol === "admin") {
             let data = req.body;
 
             let id = req.params.id;
@@ -90,11 +82,9 @@ UserController.login = (req, res) => {
             } catch (error) {
 
             }
-        };
-    };
+};
 
 UserController.deleteAll = async (req, res) => {
-    if (req.User.user.rol === "admin") {
         try {
             const user = await User.destroy({
                 where: {},
@@ -104,13 +94,9 @@ UserController.deleteAll = async (req, res) => {
         } catch (error) {
             res.send(error)
         }
-    };
 };
 
-
 UserController.deleteById = async (req, res) => {
-    if (req.User.user.rol === "admin") {
-    
         let id = req.params.id
     
         try {
@@ -122,7 +108,6 @@ UserController.deleteById = async (req, res) => {
         } catch (error) {
             res.send(error)
         }
-    };
 };
 
 UserController.logout = async (req, res) =>{

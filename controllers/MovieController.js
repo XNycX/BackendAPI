@@ -54,7 +54,6 @@ MovieController.getMovieByActor = (req, res) => {
 };
 
 MovieController.create = (req, res) => {
-    if (req.User.user.rol === "admin") {
         try {
             Movie.create({
                 ...req.body
@@ -66,12 +65,9 @@ MovieController.create = (req, res) => {
         } catch (error) {
             res.send(error);
         }
-    };
 };
 
 MovieController.delete = (req, res) => {
-    if (req.User.user.rol === "admin") {
-
         let title = req.params.title;
     
         try {
@@ -83,9 +79,7 @@ MovieController.delete = (req, res) => {
         } catch (error) {
             res.send(error)
         };
-    };
 };
-
 // MovieController.OpinionMovie = (req, res) => {
 
 // };
