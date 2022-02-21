@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-//name,surname,email,direction,telephone
+//name,city,email,direction,telephone
 
 
   async up (queryInterface, Sequelize) {
