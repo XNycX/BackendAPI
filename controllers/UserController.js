@@ -36,13 +36,15 @@ UserController.getUserByEmail = (req, res) => {
 };
 
 UserController.register = async (req, res) => {
-    try {
-       const hash = bcrypt.hashSync(req.body.password,Number.parseInt(authConfig.rounds))
-       const user = await User.create({ ...req.body,password:hash })
-        res.send(`${user.name}, bienvenid@ a este infierno`);
-    } catch (error) {
-        res.send(error);
-    }
+    if (password.length >= 8) {
+        try {
+            const hash = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
+            const user = await User.create({ ...req.body, password: hash })
+            res.send(`${user.name}, bienvenid@ a este infierno`);
+        } catch (error) {
+            res.send(error);
+        };
+    };
 };
 
 UserController.login = (req, res) => {
@@ -87,30 +89,35 @@ UserController.update = async (req, res) => {
 };
 
 UserController.deleteAll = async (req, res) => {
-
-    try {
-        const user = await User.destroy({
-            where: {},
-            truncate:false
-        })
-            res.send(`Se han eliminado ${user.name}`) 
-    } catch (error) {
-        res.send(error)
-    }
+    if (req.User.user.rol === "admin") {
+        try {
+            const user = await User.destroy({
+                where: {},
+                truncate: false
+            })
+            res.send(`Se han eliminado ${user.name}`)
+        } catch (error) {
+            res.send(error)
+        }
+    };
 };
 
+
 UserController.deleteById = async (req, res) => {
-    let id = req.params.id
+    if (req.User.user.rol === "admin") {
     
-    try {
-        const user = await User.destroy({
-            where: {id:id},
-            truncate:false
-        })
-            res.send(`Se han eliminado ${id}`) 
-    } catch (error) {
-        res.send(error)
-    }
+        let id = req.params.id
+    
+        try {
+            const user = await User.destroy({
+                where: { id: id },
+                truncate: false
+            })
+            res.send(`Se han eliminado ${id}`)
+        } catch (error) {
+            res.send(error)
+        }
+    };
 };
 
 UserController.logout = async (req, res) =>{
@@ -119,7 +126,7 @@ UserController.logout = async (req, res) =>{
                     where: {
                         [Op.and]: [
                             { UserId: req.user.id },
-                            { token: req.headers.authorization }
+                            { token: req.headers.authConfig.secret }
                         ]
                     }
                 });
@@ -128,7 +135,7 @@ UserController.logout = async (req, res) =>{
                 console.log(error)
                 res.status(500).send({ message: 'hubo un problema al tratar de desconectarte' })
             }
-        }
+};
 
 // UserController.register = (req, res) => {
 //     User.create({ ...req.body }).then(user => {

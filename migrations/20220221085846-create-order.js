@@ -31,7 +31,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      date_alquiler: {
+      date_rent: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      date_return: {
         allowNull: false,
         type: Sequelize.DATE
       },

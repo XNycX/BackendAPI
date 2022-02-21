@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      surname: {
+      ciudad: {
         type: Sequelize.STRING
       },
       email: {
@@ -23,6 +23,9 @@ module.exports = {
       },
       telephone: {
         type: Sequelize.INTEGER
+      },
+      rol: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
