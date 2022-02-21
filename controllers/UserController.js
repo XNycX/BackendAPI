@@ -1,6 +1,11 @@
-const { User } = require('../models/index');
+const { User, Token } = require('../models/index');
 const UserController = {};
 const bcrypt = require('bcryptjs');
+const authConfig = require('../config/auth');
+const jwt = require('jsonwebtoken');
+const { jwt_secret } = require('../config/config.json')['development'];
+const { Op} = Sequelize;
+
 
 UserController.getUser = (req, res) => {
     //Búsqueda trayendo a todos los usuarios
@@ -8,7 +13,6 @@ UserController.getUser = (req, res) => {
         .then(data => {
             res.send(data)
         });
-
 };
 
 UserController.getUserById = (req, res) => {
@@ -33,7 +37,7 @@ UserController.getUserByEmail = (req, res) => {
 
 UserController.register = async (req, res) => {
     try {
-       const hash = await bcrypt.hash(req.body.password,10)
+       const hash = bcrypt.hashSync(req.body.password,Number.parseInt(authConfig.rounds))
        const user = await User.create({ ...req.body,password:hash })
         res.send(`${user.name}, bienvenid@ a este infierno`);
     } catch (error) {
@@ -41,6 +45,45 @@ UserController.register = async (req, res) => {
     }
 };
 
+UserController.login = (req, res) => {
+
+    User.findOne({
+        where:{
+            email:req.body.email
+        }
+    }).then(user=>{
+        if(!user){
+            return res.status(400).send({message:"Usuario o contraseña incorrectos"})
+        }
+        const isMatch = bcrypt.compareSync(req.body.password, user.password);
+        if(!isMatch){
+            return res.status(400).send({message:"Usuario o contraseña incorrectos"})
+        }
+        token = jwt.sign({ id: user.id }, jwt_secret),
+            Token.create({ token, UserId: user.id });
+            res.send({ message: `Bienvenid@ ${user.name}, ${user} , ${token}` });
+    })
+},
+
+UserController.update = async (req, res) => {
+
+    let data = req.body;
+
+    let id = req.params.id;
+
+    try {
+
+        User.update(data, {
+            where: {id : id}
+        })
+        .then(updated => {
+            res.send(updated);
+        });
+
+    } catch (error) {
+
+    }
+};
 
 UserController.deleteAll = async (req, res) => {
 
@@ -55,7 +98,7 @@ UserController.deleteAll = async (req, res) => {
     }
 };
 
-UserController.delete = async (req, res) => {
+UserController.deleteById = async (req, res) => {
     let id = req.params.id
     
     try {
@@ -68,6 +111,23 @@ UserController.delete = async (req, res) => {
         res.send(error)
     }
 };
+
+UserController.logout = async (req, res) =>{
+            try {
+                await Token.destroy({
+                    where: {
+                        [Op.and]: [
+                            { UserId: req.user.id },
+                            { token: req.headers.authorization }
+                        ]
+                    }
+                });
+                res.send({ message: 'Desconectado con éxito' })
+            } catch (error) {
+                console.log(error)
+                res.status(500).send({ message: 'hubo un problema al tratar de desconectarte' })
+            }
+        }
 
 // UserController.register = (req, res) => {
 //     User.create({ ...req.body }).then(user => {
