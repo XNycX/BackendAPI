@@ -8,31 +8,34 @@ const { Op} = Sequelize;
 
 
 UserController.getUser = (req, res) => {
-    //Búsqueda trayendo a todos los usuarios
-    User.findAll()
-        .then(data => {
-            res.send(data)
-        });
+    if (req.User.user.rol === "admin") {
+        User.findAll()
+            .then(data => {
+                res.send(data)
+            });
+    };
 };
 
 UserController.getUserById = (req, res) => {
-    //Búsqueda buscando una Id
-    User.findByPk(req.params.id)
-        .then(data => {
-            res.send(data)
-        });
+    if (req.User.user.rol === "admin") {
+        User.findByPk(req.params.id)
+            .then(data => {
+                res.send(data)
+            });
+    };
 };
 
 UserController.getUserByEmail = (req, res) => {
-    //Búsqueda comparando un campo
-    User.findOne({
-        where: {
-            email: req.params.email
-        }
-    })
-        .then(data => {
-            res.send(data)
-        });
+    if (req.User.user.rol === "admin") {
+        User.findOne({
+            where: {
+                email: req.params.email
+            }
+        })
+            .then(data => {
+                res.send(data)
+            });
+    };
 };
 
 UserController.register = async (req, res) => {
@@ -50,43 +53,45 @@ UserController.register = async (req, res) => {
 UserController.login = (req, res) => {
 
     User.findOne({
-        where:{
-            email:req.body.email
+        where: {
+            email: req.body.email
         }
-    }).then(user=>{
-        if(!user){
-            return res.status(400).send({message:"Usuario o contraseña incorrectos"})
+    }).then(user => {
+        if (!user) {
+            return res.status(400).send({ message: "Usuario o contraseña incorrectos" })
         }
         const isMatch = bcrypt.compareSync(req.body.password, user.password);
-        if(!isMatch){
-            return res.status(400).send({message:"Usuario o contraseña incorrectos"})
+        if (!isMatch) {
+            return res.status(400).send({ message: "Usuario o contraseña incorrectos" })
         }
-         token = jwt.sign({ id: user.id }, authConfig.secret, {
-            expiresIn: authConfig.expires,});
-            Token.create({ token, UserId: user.id });
-            res.send({ message: `Bienvenid@ ${user.name}, ${user} , ${token}` });
+        token = jwt.sign({ id: user.id }, authConfig.secret, {
+            expiresIn: authConfig.expires,
+        });
+        Token.create({ token, UserId: user.id });
+        res.send({ message: `Bienvenid@ ${user.name}, ${user} , ${token}` });
     })
 },
 
-UserController.update = async (req, res) => {
+    UserController.update = async (req, res) => {
+        if (req.User.user.rol === "admin") {
+            let data = req.body;
 
-    let data = req.body;
+            let id = req.params.id;
 
-    let id = req.params.id;
+            try {
 
-    try {
+                User.update(data, {
+                    where: { id: id }
+                })
+                    .then(updated => {
+                        res.send(updated);
+                    });
 
-        User.update(data, {
-            where: {id : id}
-        })
-        .then(updated => {
-            res.send(updated);
-        });
+            } catch (error) {
 
-    } catch (error) {
-
-    }
-};
+            }
+        };
+    };
 
 UserController.deleteAll = async (req, res) => {
     if (req.User.user.rol === "admin") {
@@ -95,7 +100,7 @@ UserController.deleteAll = async (req, res) => {
                 where: {},
                 truncate: false
             })
-            res.send(`Se han eliminado ${user.name}`)
+            res.send(`Se han eliminado los usuarios ${user.name}`)
         } catch (error) {
             res.send(error)
         }
