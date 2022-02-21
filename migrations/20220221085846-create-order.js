@@ -1,15 +1,26 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Tokens', {
+    await queryInterface.createTable('Orders', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      token: {
-        type: Sequelize.STRING
+      price: {
+        type: Sequelize.INTEGER
+      },
+
+      MovieId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Movies',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       UserId: {
         type: Sequelize.INTEGER,
@@ -20,6 +31,10 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      },
+      date_alquiler: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +47,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tokens');
+    await queryInterface.dropTable('Orders');
   }
 };
