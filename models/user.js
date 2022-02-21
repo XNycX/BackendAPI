@@ -14,9 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Order, {
         foreignKey: 'UserId'
       });
-      this.hasMany(models.Token, {
-        foreignKey: 'UserId'
-      });
     }
   }
   User.init({

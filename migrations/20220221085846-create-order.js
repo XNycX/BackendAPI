@@ -11,7 +11,6 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
-
       MovieId: {
         type: Sequelize.INTEGER,
         allowNull: false,
