@@ -3,7 +3,7 @@ const UserController = {};
 const bcrypt = require('bcryptjs');
 const authConfig = require('../config/auth');
 const jwt = require('jsonwebtoken');
-const { jwt_secret } = require('../config/config.json')['development'];
+// const { jwt_secret } = require('../config/config.json')['development'];
 const { Op} = Sequelize;
 
 
@@ -59,7 +59,8 @@ UserController.login = (req, res) => {
         if(!isMatch){
             return res.status(400).send({message:"Usuario o contraseña incorrectos"})
         }
-        token = jwt.sign({ id: user.id }, jwt_secret),
+         token = jwt.sign({ id: user.id }, authConfig.secret, {
+            expiresIn: authConfig.expires,});
             Token.create({ token, UserId: user.id });
             res.send({ message: `Bienvenid@ ${user.name}, ${user} , ${token}` });
     })
