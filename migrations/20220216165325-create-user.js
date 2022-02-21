@@ -24,7 +24,7 @@ module.exports = {
       telephone: {
         type: Sequelize.INTEGER
       },
-      rol: {
+      role: {
         type: Sequelize.STRING
       },
       createdAt: {

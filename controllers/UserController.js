@@ -33,16 +33,17 @@ UserController.getUserByEmail = (req, res) => {
 };
 
 UserController.register = async (req, res) => {
-    if (password.length >= 8) {
+    if (/^([a-zA-Z0-9@*#]{8,15})$/.test(req.body.password) !== true) {
+        return res.send("La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres.")
+     }
         try {
             const hash = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
             const user = await User.create({ ...req.body, password: hash })
             res.send(`${user.name}, bienvenid@ a este infierno`);
         } catch (error) {
-            res.send(error);
+            res.status(400).send({msg: error.errors[0].message});
         };
     };
-};
 
 UserController.login = (req, res) => {
     User.findOne({

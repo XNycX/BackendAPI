@@ -41,18 +41,6 @@ MovieController.getMovieByGender = (req, res) => {
         });
 };
 
-MovieController.getMovieByActor = (req, res) => {
-    //Búsqueda comparando un campo
-    Movie.findAll({
-        where: {
-            actor: req.params.actor
-        }
-    })
-        .then(data => {
-            res.send(data)
-        });
-};
-
 MovieController.create = (req, res) => {
         try {
             Movie.create({

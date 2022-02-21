@@ -14,9 +14,6 @@ module.exports = {
       overview: {
         type: Sequelize.STRING
       },
-      gender: {
-        type: Sequelize.STRING
-      },
       popularity: {
         type: Sequelize.FLOAT
       },
