@@ -1,5 +1,6 @@
 const { Movie } = require('../models/index');
 const MovieController = {};
+const { Op } = Sequelize;
 
 MovieController.getMovie = (req, res) => {
     //Búsqueda trayendo a todos los Movies
