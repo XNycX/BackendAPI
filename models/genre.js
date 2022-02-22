@@ -5,10 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Genre extends Model {
     static associate(models) {
-      Genre.belongsToMany(models.Movie, {
-        through: models.GenreMovie,
-        onDelete: 'cascade'
-      });
     }
   }
   Genre.init({

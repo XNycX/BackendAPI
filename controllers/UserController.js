@@ -39,7 +39,7 @@ UserController.register = async (req, res) => {
             const user = await User.create({ ...req.body, password: hash })
             res.send(`${user.name}, bienvenid@ a este infierno`);
         } catch (error) {
-            res.status(400).send({msg: error.errors[0].message});
+            res.status(400).send(error);
         };
     };
 
@@ -59,7 +59,7 @@ UserController.login = (req, res) => {
         token = jwt.sign({ id: user.id }, authConfig.secret, {
             expiresIn: authConfig.expires,
         });
-        res.send({ message: `Bienvenid@ ${user.name}, ${user} , ${token}` });
+        res.send({ message: `Bienvenid@ ${user.name}, tu token es: ${token}` });
     })
 },
 

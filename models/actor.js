@@ -5,10 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Actor extends Model {
     static associate(models) {
-      Actor.belongsToMany(models.Movie, {
-        through: models.ActorMovie,
-        onDelete: 'cascade'
-      });
+    
     }
   }
   Actor.init({

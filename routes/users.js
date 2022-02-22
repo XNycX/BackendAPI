@@ -10,7 +10,7 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 router.get('/',authentication,UserController.getUser);
 router.get('/id',authentication,UserController.getUserById);
 router.get('/email',authentication,UserController.getUserByEmail);
-router.post('/',UserController.register);
+router.post('/register',UserController.register);
 router.post('/login',UserController.login);
 router.put('/', authentication, UserController.update);
 router.delete('/',isAdmin,authentication,UserController.deleteAll);

@@ -9,12 +9,14 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Order, {
         foreignKey: 'MovieId'
       });
-      Movie.belongsToMany(models.Genre, {
-        through: models.GenreMovie
-      }, { onDelete: 'cascade' });
-      Movie.belongsToMany(models.Actor, {
-        through: models.ActorMovie
-      }, { onDelete: 'cascade' });
+      this.belongsToMany(models.Genre, {
+        through:models.GenreMovie,
+        foreignKey: 'MovieId'
+      });
+      this.belongsToMany(models.Actor, {
+        through:models.ActorMovie,
+        foreignKey: 'MovieId'
+      });
     }
   }
   Movie.init({

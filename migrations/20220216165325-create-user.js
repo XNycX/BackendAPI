@@ -21,8 +21,9 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      direction: {
-        type: Sequelize.STRING
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       telephone: {
         type: Sequelize.INTEGER
