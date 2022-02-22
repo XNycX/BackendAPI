@@ -28,8 +28,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       role: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        type: Sequelize.STRING,
+        defaultValue: "user",
       },
       createdAt: {
         allowNull: false,

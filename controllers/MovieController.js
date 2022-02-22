@@ -1,6 +1,6 @@
 const { Movie } = require('../models/index');
+const movie = require('../models/movie');
 const MovieController = {};
-const { Op } = Sequelize;
 
 MovieController.getMovie = (req, res) => {
     //Búsqueda trayendo a todos los Movies
@@ -44,19 +44,20 @@ MovieController.getMovieByGender = (req, res) => {
 
 MovieController.create = (req, res) => {
         try {
-            Movie.create({
-                ...req.body
-            }).then(Movie => {
-                console.log("esta es la pelicula", Movie);
-                res.send(`${Movie.title}, se ha añadido correctamente`);
-            });
+            Movie.create({ ...req.body })
+                .then(movie => {
+                    movie.addGenre(req.body.GenreId)
+                    movie.addActor(req.body.ActorId)
+                    res.send(movie)
+                    res.send(`${Movie.title}, se ha añadido correctamente`);
+                 });
 
         } catch (error) {
             res.send(error);
         }
 };
 
-MovieController.delete = (req, res) => {
+MovieController.delete = async (req, res) => {
         let title = req.params.title;
     
         try {

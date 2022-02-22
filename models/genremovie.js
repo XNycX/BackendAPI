@@ -5,6 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class GenreMovie extends Model {
     static associate(models) {
+  
     }
   }
   GenreMovie.init({

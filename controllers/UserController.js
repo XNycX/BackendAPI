@@ -3,7 +3,6 @@ const UserController = {};
 const bcrypt = require('bcryptjs');
 const authConfig = require('../config/auth');
 const jwt = require('jsonwebtoken');
-const { Op} = Sequelize;
 
 
 UserController.getUser = (req, res) => {

@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     direction: DataTypes.STRING,
     telephone: DataTypes.INTEGER,
-    role: DataTypes.BOOLEAN,
+    role: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'User',
