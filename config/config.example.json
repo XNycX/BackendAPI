@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "tu usuario",
-    "password": "tu contra",
+    "password": "tu contraseña",
     "database": "nombre de tu db",
     "host": "127.0.0.1",
     "dialect": "mysql"

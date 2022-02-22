@@ -1,9 +1,8 @@
-const { User, Token } = require('../models/index');
+const { User } = require('../models/index');
 const UserController = {};
 const bcrypt = require('bcryptjs');
 const authConfig = require('../config/auth');
 const jwt = require('jsonwebtoken');
-// const { jwt_secret } = require('../config/config.json')['development'];
 const { Op} = Sequelize;
 
 
@@ -61,7 +60,6 @@ UserController.login = (req, res) => {
         token = jwt.sign({ id: user.id }, authConfig.secret, {
             expiresIn: authConfig.expires,
         });
-        Token.create({ token, UserId: user.id });
         res.send({ message: `Bienvenid@ ${user.name}, ${user} , ${token}` });
     })
 },
@@ -111,30 +109,4 @@ UserController.deleteById = async (req, res) => {
         }
 };
 
-UserController.logout = async (req, res) =>{
-            try {
-                await Token.destroy({
-                    where: {
-                        [Op.and]: [
-                            { UserId: req.user.id },
-                            { token: req.headers.authConfig.secret }
-                        ]
-                    }
-                });
-                res.send({ message: 'Desconectado con éxito' })
-            } catch (error) {
-                console.log(error)
-                res.status(500).send({ message: 'hubo un problema al tratar de desconectarte' })
-            }
-};
-
-// UserController.register = (req, res) => {
-//     User.create({ ...req.body }).then(user => {
-//         console.log("este es mi amigo", user);
-//         res.send(`${user.name}, bienvenida a este infierno`);
-//     }).catch(err => {
-//         console.error(err)
-//         res.send(err)
-//     })
-// };
 module.exports = UserController;
