@@ -12,7 +12,7 @@ module.exports = {
    {"title":"Charlie Brown's Christmas Tales","overview":"Integer a nibh. In quis justo.","popularity":5.6,"img":"Vestibulum rutrum rutrum neque.","release_date":"2011-10-06","createdAt":"2011-04-08","updatedAt":"2015-07-21"},
    {"title":"My Flesh My Blood (Moja krew)","overview":"Nam nulla.","popularity":1.9,"img":"Pellentesque at nulla. Suspendisse potenti.","release_date":"1994-02-26","createdAt":"1994-10-28","updatedAt":"1997-12-27"},
    {"title":"Little Girl Who Lives Down the Lane, The","overview":"Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend.","popularity":7.1,"img":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.","release_date":"2021-08-16","createdAt":"2011-02-17","updatedAt":"2003-02-17"},
-     { "title": "East of Eden", "overview": "In blandit ultrices enim.", "popularity": 7.6, "img": "Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus.", "release_date": "1995-12-15", "createdAt": "2001-01-15", "updatedAt": "1996-06-08" }],
+  {"title":"East of Eden","overview":"In blandit ultrices enim.","popularity": 7.6,"img":"Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus.","release_date":"1995-12-15","createdAt":"2001-01-15","updatedAt":"1996-06-08"}],
     ], {});
   },
 
