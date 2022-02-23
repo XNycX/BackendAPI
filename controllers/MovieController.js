@@ -1,13 +1,15 @@
-const { Movie, Genre } = require('../models/index');
+const { Movie, Genre, Actor } = require('../models/index');
 const MovieController = {};
 
 MovieController.getMovie = (req, res) => {
-    //Búsqueda trayendo a todos los Movies
+    //Búsqueda trayendo a todos los Movies con generos y actores
     Movie.findAll({
         include: [
-            {model: Genre, as: 'Genres', through: {attributes: []}},
+            {model: Genre, as: 'Genres', through: {attributes: []}},{model: Actor, as: 'Actors', through: {attributes: []}}
         ]
     })
+        
+        
     
     .then(data => res.send(data))
     .catch(error=> {
@@ -63,15 +65,15 @@ MovieController.create = (req, res) => {
         }
 };
 
-MovieController.delete = async (req, res) => {
-        let title = req.params.title;
+MovieController.deleteById = async (req, res) => {
+        let id = req.params.id;
     
         try {
             const film = await Movie.destroy({
-                where: { title: title },
+                where: { id: id },
                 truncate: false
             })
-            res.send(`Se ha eliminado la pelicula ${title}`)
+            res.send(`Se ha eliminado la pelicula ${id}`)
         } catch (error) {
             res.send(error)
         };

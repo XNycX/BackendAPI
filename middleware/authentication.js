@@ -1,7 +1,6 @@
 const { User, Token, Sequelize } = require('../models');
 const { Op } = Sequelize;
 const jwt = require('jsonwebtoken');
-// const  { jwt_secret }  = require('../config/config.json')['development']
 const authConfig = require('../config/auth');
 
 const authentication = async (req, res, next) => {
