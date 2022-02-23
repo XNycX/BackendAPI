@@ -1,14 +1,21 @@
-const { Movie } = require('../models/index');
-const movie = require('../models/movie');
+const { Movie, Genre } = require('../models/index');
 const MovieController = {};
 
 MovieController.getMovie = (req, res) => {
     //Búsqueda trayendo a todos los Movies
-    Movie.findAll()
-        .then(data => {
-            res.send(data)
-        });
-};
+    Movie.findAll({
+        include: [
+            {model: Genre, as: 'Genres', through: {attributes: []}},
+        ]
+    })
+    
+    .then(data => res.send(data))
+    .catch(error=> {
+        console.log(error)
+        res.status(500).send({ message: 'Ha habido un problema al cargar la pelicula' })
+    })
+},
+
 
 MovieController.getMovieById = (req, res) => {
     //Búsqueda buscando una Id
@@ -49,7 +56,6 @@ MovieController.create = (req, res) => {
                     movie.addGenre(req.body.GenreId)
                     movie.addActor(req.body.ActorId)
                     res.send(movie)
-                    res.send(`${Movie.title}, se ha añadido correctamente`);
                  });
 
         } catch (error) {
