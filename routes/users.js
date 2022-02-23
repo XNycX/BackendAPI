@@ -13,6 +13,7 @@ router.get('/email',authentication,UserController.getUserByEmail);
 router.post('/register',UserController.register);
 router.post('/login',UserController.login);
 router.put('/', authentication, UserController.update);
+router.put('/newpassword', authentication, UserController.updatePassword);
 router.delete('/',isAdmin,authentication,UserController.deleteAll);
 router.delete('/delete',isAdmin,authentication,UserController.deleteById);
 

@@ -3,6 +3,7 @@ const UserController = {};
 const bcrypt = require('bcryptjs');
 const authConfig = require('../config/auth');
 const jwt = require('jsonwebtoken');
+const { Where } = require('sequelize/types/utils');
 
 
 UserController.getUser = (req, res) => {
@@ -63,7 +64,7 @@ UserController.login = (req, res) => {
     })
 },
 
-    UserController.update = async (req, res) => {
+    UserController.update = (req, res) => {
             let data = req.body;
 
             let id = req.params.id;
@@ -78,8 +79,63 @@ UserController.login = (req, res) => {
                     });
 
             } catch (error) {
-
+                res.send(error)
             }
+};
+
+UsuarioController.updatePassword = (req,res) => {
+
+    let id = req.body.id;
+
+    let oldPassword = req.body.oldPassword;
+
+    let newPassword = req.body.newPassword;
+
+    Usuario.findOne({
+        where : { id : id}
+    }).then(usuarioFound => {
+
+        if(usuarioFound){
+
+            if (bcrypt.compareSync(oldPassword, usuarioFound.password)) {
+
+                //En caso de que el Password antiguo SI sea el correcto....
+
+                //1er paso..encriptamos el nuevo password....
+
+                newPassword = bcrypt.hashSync(newPassword, Number.parseInt(authConfig.rounds)); 
+
+                ////////////////////////////////7
+
+                //2do paso guardamos el nuevo password en la base de datos
+
+                let data = {
+                    password: newPassword
+                }
+
+                console.log("esto es data",data);
+                
+                Usuario.update(data, {
+                    where: {id : id}
+                })
+                .then(actualizado => {
+                    res.send(actualizado);
+                })
+                .catch((error) => {
+                    res.status(401).json({ msg: `Ha ocurrido un error actualizando el password`});
+                });
+
+            }else{
+                res.status(401).json({ msg: "Usuario o contraseña inválidos" });
+            }
+        }else{
+            res.send(`Usuario no encontrado`);
+        }
+
+    }).catch((error => {
+        res.send(error);
+    }));
+
 };
 
 UserController.deleteAll = async (req, res) => {
