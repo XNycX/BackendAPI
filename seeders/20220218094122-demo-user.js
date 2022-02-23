@@ -1,7 +1,7 @@
 'use strict';
 
 
-  //name,city,email,password,direction,telephone
+  //name,city,email,password,telephone,role
   
   const bcrypt = require('bcrypt');
 const authConfig = require('../config/auth');
@@ -19,9 +19,8 @@ const authConfig = require('../config/auth');
       "name":"David","city":"Valencia","email":"david@gmail.com","password":bcrypt.hashSync("12345678",Number.parseInt(authConfig.rounds)),"telephone":"666666666","role":"user" ,"createdAt":"2003-04-14","updatedAt":"2006-01-31" 
   },{   
     "name":"Leonardo","city":"Sevilla","email":"leonardo@gmail.com","password":bcrypt.hashSync("12345678",Number.parseInt(authConfig.rounds)),"telephone":"666666666","role":"user" ,"createdAt":"2003-04-14","updatedAt":"2006-01-31" 
-},],
-        ], {});
-      },
+}, ], ], {});
+},
     
   
 
@@ -33,6 +32,5 @@ const authConfig = require('../config/auth');
          * await queryInterface.bulkDelete('People', null, {});
          */
       }
-    }
-  
+      }
 
