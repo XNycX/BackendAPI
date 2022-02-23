@@ -1,9 +1,10 @@
 const { User } = require('../models/index');
+const { Op } = require("sequelize");
 const UserController = {};
 const bcrypt = require('bcryptjs');
 const authConfig = require('../config/auth');
 const jwt = require('jsonwebtoken');
-const { Where } = require('sequelize/types/utils');
+
 
 
 UserController.getUser = (req, res) => {
@@ -38,7 +39,7 @@ UserController.register = async (req, res) => {
         try {
             const hash = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
             const user = await User.create({ ...req.body, password: hash })
-            res.send(`${user.name}, bienvenid@ a este infierno`);
+            res.send(`${user.name}, bienvenid@ a films2022`);
         } catch (error) {
             res.status(400).send(error);
         };
@@ -83,7 +84,7 @@ UserController.login = (req, res) => {
             }
 };
 
-UsuarioController.updatePassword = (req,res) => {
+UserController.updatePassword = (req,res) => {
 
     let id = req.body.id;
 
