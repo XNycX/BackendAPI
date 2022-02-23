@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     overview: DataTypes.STRING,
     popularity: DataTypes.FLOAT,
     img: DataTypes.STRING,
-    release_date: DataTypes.STRING
+    release_date: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Movie',

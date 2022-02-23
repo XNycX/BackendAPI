@@ -4,20 +4,12 @@ const jwt = require('jsonwebtoken');
 // const  { jwt_secret }  = require('../config/config.json')['development']
 const authConfig = require('../config/auth');
 
-const authentication = async(req, res, next) => {
+const authentication = async (req, res, next) => {
     try {
-        const token = req.headers.authorization.split(" ")[1];
+        const token = req.headers.authorization;
         const payload = jwt.verify(token, authConfig.secret);
         const user = await User.findByPk(payload.id);
-        const tokenFound = await Token.findOne({
-            where: {
-                [Op.and]: [
-                    { UserId: user.id },
-                    { token: token }
-                ]
-            }
-        });
-        if (!user || !tokenFound) {
+        if (!user ) {
             res.status(401).send({ message: 'No estas autorizado' });
         }
         req.user = user;
