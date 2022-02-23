@@ -3,16 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('genres',
-    [[  {"name":"Horror"},
-        {"name":"Film-Noir"},
-        {"name":"Adventure"},
-        {"name":"Comedy"},
-        {"name":"Romance"},
-        {"name":"Drama"},
-        {"name":"Western"},
-        {"name":"Fantasy"},
-        {"name":"Crime"},
-        {"name":"Action"}]
+    [[{"name":"Horror"},{"name":"Film-Noir"},{"name":"Adventure"},{"name":"Comedy"},{"name":"Romance"},{"name":"Drama"},{"name":"Western"},{"name":"Fantasy"},{"name":"Crime"},{"name":"Action"}]
       ], {});
     },
 
