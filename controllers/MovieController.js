@@ -8,9 +8,6 @@ MovieController.getMovie = (req, res) => {
             {model: Genre, as: 'Genres', through: {attributes: []}},{model: Actor, as: 'Actors', through: {attributes: []}}
         ]
     })
-        
-        
-    
     .then(data => res.send(data))
     .catch(error=> {
         console.log(error)
@@ -64,6 +61,27 @@ MovieController.create = (req, res) => {
             res.send(error);
         }
 };
+
+MovieController.createMany = async (req, res) => {
+        try {
+            const movies = req.body;
+            const moviesResponse = []
+            movies.forEach(async movie => {
+                const movieCreated = await Movie.create({ ...movie });
+                movieCreated.addGenre(movie.GenreId);
+                moviesResponse.push(movieCreated)
+            });
+            res.send('movies created')
+        }
+        catch (error) {
+            res.send(error)
+        }
+    };
+    
+
+
+
+
 
 MovieController.deleteById = async (req, res) => {
         let id = req.params.id;

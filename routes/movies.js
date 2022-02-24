@@ -7,7 +7,8 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 router.get('/', MovieController.getMovie);
 router.get('/:id', MovieController.getMovieById);
 router.get('/gender/:gender', MovieController.getMovieByGender);
-router.post('/',authentication,isAdmin, MovieController.create);
+router.post('/', authentication, isAdmin, MovieController.create);
+router.post('/many',authentication,isAdmin, MovieController.createMany);
 router.delete('/:id',authentication,isAdmin, MovieController.deleteById);
 
 module.exports = router;
