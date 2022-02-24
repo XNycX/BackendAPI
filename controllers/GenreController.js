@@ -1,4 +1,4 @@
-const { Genre } = require('../models/index');
+const { Genre,Actor, Movie } = require('../models/index');
 const GenreController = {};
 
 GenreController.create = (req, res) => {
@@ -51,5 +51,20 @@ GenreController.delete = async (req, res) => {
         res.send(error)
     }
 };
+
+GenreController.getGenreByName = (req, res) => {
+    Genre.findAll({
+        where: {
+            name: req.params.name
+        },
+        include: [
+            {model: Movie, as: 'Movies', through: {attributes: []}}
+        ]
+    })
+        .then(data => {
+            res.send(data)
+        });
+};
+
 
 module.exports = GenreController;

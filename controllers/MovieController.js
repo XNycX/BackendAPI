@@ -1,7 +1,7 @@
 const { Movie, Genre, Actor } = require('../models/index');
 const MovieController = {};
 
-MovieController.getMovie = (req, res) => {
+MovieController.getMovies = (req, res) => {
     //Búsqueda trayendo a todos los Movies con generos y actores
     Movie.findAll({
         include: [

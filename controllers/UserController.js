@@ -47,7 +47,7 @@ UserController.register = async (req, res) => {
         };
 };
     
-    UserController.registerByEmail = async (req, res) => {
+UserController.registerByEmail = async (req, res) => {
         if (/^([a-zA-Z0-9@*#]{8,15})$/.test(req.body.password) !== true) {
             return res.send("La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres.")
          }
@@ -55,11 +55,11 @@ UserController.register = async (req, res) => {
                 const hash = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
                 const user = await User.create({ ...req.body, password: hash, confirmed: 0, role: "user" });
                 await transporter.sendMail({ to: req.body.email,
-                    subject: "Confirme su registro",
+                    subject: "Confirme su registro en films2022",
                     html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
                     <a href="#"> Click para confirmar tu registro</a> `,
                   });
-                res.send(`${user.name},Te hemos enviado un correo para confirmar el registro`);
+                res.send(`${user.name}, Te hemos enviado un correo para confirmar el registro en la web films2022`);
             } catch (error) {
                 res.status(400).send(error);
             };
@@ -109,13 +109,14 @@ UserController.loginByEmail = (req, res) => {
     })
 },    
 
-    UserController.update = (req, res) => {
+UserController.update = (req, res) => {
             let data = req.body;
 
             let id = req.params.id;
+            
 
             try {
-
+                
                 User.update(data, {
                     where: { id: id }
                 })
@@ -196,14 +197,15 @@ UserController.deleteAll = async (req, res) => {
 };
 
 UserController.deleteById = async (req, res) => {
-        let id = req.params.id
+    let id = req.params.id
+    
     
         try {
             const user = await User.destroy({
                 where: { id: id },
                 truncate: false
             })
-            res.send(`Se han eliminado ${id}`)
+            res.send(`Se ha eliminado la id de usuario ${id}`)
         } catch (error) {
             res.send(error)
         }

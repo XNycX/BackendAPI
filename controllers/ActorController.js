@@ -1,4 +1,4 @@
-const { Actor } = require('../models/index');
+const { Actor, Movie } = require('../models/index');
 const ActorController = {};
 
 ActorController.create = (req, res) => {
@@ -11,6 +11,20 @@ ActorController.create = (req, res) => {
     } catch (error) {
         res.send(error);
     }
+};
+
+ActorController.getActorByName = (req, res) => {
+    Actor.findAll({
+        where: {
+            name: req.params.name
+        },
+        include: [
+            {model: Movie, as: 'Movies', through: {attributes: []}}
+        ]
+    })
+        .then(data => {
+            res.send(data)
+        });
 };
 
 ActorController.getActor = (req, res) => {

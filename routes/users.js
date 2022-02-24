@@ -14,9 +14,9 @@ router.post('/register', UserController.register);
 router.post('/register/email',UserController.registerByEmail);
 router.post('/login', UserController.login);
 router.post('/login/email',UserController.loginByEmail);
-router.put('/', authentication, UserController.update);
 router.put('/newpassword', authentication, UserController.updatePassword);
+router.put('/:id', authentication, UserController.update);
 router.delete('/',authentication,isAdmin,UserController.deleteAll);
-router.delete('/delete',authentication,isAdmin,UserController.deleteById);
+router.delete('/delete/:id',authentication,isAdmin,UserController.deleteById);
 
 module.exports = router;

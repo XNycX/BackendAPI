@@ -3,10 +3,8 @@ const OrderController = {};
 
 OrderController.placeNewOrder = (req,res) => {
     try {
-        Order.create({ ...req.body/*,date_return:new Date(new Date(updatedAt) + 72 * 60 * 60 * 1000)*/ })
+        Order.create({ ...req.body})
             .then(order => {
-                /*order.addMovie(req.body.MovieId)
-                order.addUser(req.body.UserId)*/
                 res.send(order)
              });
 
@@ -16,7 +14,11 @@ OrderController.placeNewOrder = (req,res) => {
 };
 
 OrderController.getOrder = (req, res) => {
-    Order.findAll()
+    Order.findAll({
+        include: [
+            {model: Movie, as: 'Movies', through: { attributes: []}},{model: User, as: 'Users', through: {attributes: []}}
+        ]
+    })
         .then(data => {
             res.send(data)
             .catch(error=> {
