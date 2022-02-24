@@ -5,7 +5,7 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 
 
 
-router.get('/', authentication, GenreController.getGenre);
+router.get('/', authentication, GenreController.getGenres);
 router.get('/name/:name', authentication, GenreController.getGenreByName);
 router.post('/', authentication,isAdmin, GenreController.create);
 router.put('/:id', authentication,isAdmin, GenreController.update);

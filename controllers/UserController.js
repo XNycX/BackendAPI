@@ -9,7 +9,7 @@ const transporter = require("../config/nodemailer");
 
 
 
-UserController.getUser = (req, res) => {
+UserController.getUsers = (req, res) => {
         User.findAll()
             .then(data => {
                 res.send(data)

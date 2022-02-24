@@ -4,7 +4,7 @@ const router = express.Router();
 const { authentication, isAdmin } = require('../middleware/authentication');
 
 router.post('/',authentication, OrdersController.placeNewOrder);
-router.get('/',authentication, OrdersController.getOrder);
+router.get('/',authentication, OrdersController.getOrders);
 router.put('/', authentication, isAdmin, OrdersController.update);
 router.delete('/:id',authentication, isAdmin, OrdersController.deleteById);
 

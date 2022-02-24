@@ -7,7 +7,7 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 //http://localhost:3000
 
 //CRUD RESTFUL
-router.get('/',UserController.getUser);
+router.get('/',UserController.getUsers);
 router.get('/id',authentication,UserController.getUserById);
 router.get('/email',authentication,UserController.getUserByEmail);
 router.post('/register', UserController.register);

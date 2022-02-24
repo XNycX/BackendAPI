@@ -13,7 +13,7 @@ OrderController.placeNewOrder = (req,res) => {
     }
 };
 
-OrderController.getOrder = (req, res) => {
+OrderController.getOrders = (req, res) => {
     Order.findAll({
         include: [
             {model: Movie, as: 'Movies', through: { attributes: []}},{model: User, as: 'Users', through: {attributes: []}}

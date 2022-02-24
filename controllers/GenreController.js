@@ -14,7 +14,7 @@ GenreController.create = (req, res) => {
     }
 };
 
-GenreController.getGenre = (req, res) => {
+GenreController.getGenres = (req, res) => {
     Genre.findAll()
         .then(data => {
             res.send(data)

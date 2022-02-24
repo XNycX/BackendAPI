@@ -27,7 +27,7 @@ ActorController.getActorByName = (req, res) => {
         });
 };
 
-ActorController.getActor = (req, res) => {
+ActorController.getActors = (req, res) => {
     Actor.findAll()
         .then(data => {
             res.send(data)
