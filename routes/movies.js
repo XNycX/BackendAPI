@@ -3,7 +3,7 @@ const MovieController = require('../controllers/MovieController');
 const router = express.Router();
 const { authentication, isAdmin } = require('../middleware/authentication');
 
-//CRUD RESTFUL
+
 router.get('/', MovieController.getMovies);
 router.get('/:id', MovieController.getMovieById);
 router.get('/title/:title', MovieController.getMovieByTitle);

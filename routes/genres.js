@@ -6,9 +6,9 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 
 
 router.get('/', authentication, GenreController.getGenre);
-router.get('/name/:name', GenreController.getGenreByName);
+router.get('/name/:name', authentication, GenreController.getGenreByName);
 router.post('/', authentication,isAdmin, GenreController.create);
-router.put('/', authentication,isAdmin, GenreController.update);
+router.put('/:id', authentication,isAdmin, GenreController.update);
 router.delete('/', authentication,isAdmin, GenreController.delete);
 
 
