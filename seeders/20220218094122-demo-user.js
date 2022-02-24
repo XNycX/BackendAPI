@@ -3,8 +3,8 @@
 
   //name,city,email,password,telephone,role
   
-const bcrypt = require('bcrypt');
-const authConfig = require('../config/auth');
+  const bcrypt = require('bcryptjs');;
+  const authConfig = require('../config/auth');
   
     module.exports = {
 up: async (queryInterface, Sequelize) => {
