@@ -27,7 +27,7 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 Clonarte el repositorio localmente:
 
-> git clone <url del repositorio>
+> git clone url del repositorio
   
 Instalar las depedencias necesarias:
   
