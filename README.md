@@ -35,9 +35,7 @@ Instalar las depedencias necesarias:
   
 Rellenar las variables necesarias en estos archivos para iniciar el proyecto:
   
-> config.example.json -> Incluir campos Username, Password, Database
-  
-> .env.example -> Puerto en el que quieras que se ejecute el server y jwt_secret para la utilización de jsonwebtoken en la autenticación del usuario
+> config.example.json -> Incluir campos Username, Password, Database  
   
 Creamos la base de datos:
   
