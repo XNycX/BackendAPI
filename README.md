@@ -53,6 +53,8 @@ Creamos los seeders (datos de prueba para nuestra base de datos):
 ## Modelo de la base de datos 🔧
 
 El diagrama de nuestra base de datos:
+
+![foto](/img/Diagrama.PNG)
   
 ## Endpoints 🛠️
 
