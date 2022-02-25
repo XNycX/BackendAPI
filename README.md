@@ -26,17 +26,19 @@ El proyecto ha sido desarrollado utilizando los siguientes paquetes en Nodejs:
 Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo:
 
 Clonarte el repositorio localmente:
-> git clone url del repositorio
+> git clone <url del repositorio>
 Instalar las depedencias necesarias:
 > npm i
 Rellenar las variables necesarias en estos archivos para iniciar el proyecto:
-> - config.example.json -> Incluir campos Username, Password, Database
-  Creamos la base de datos:
+> config.example.json -> Incluir campos Username, Password, Database
+> .env.example -> Puerto en el que quieras que se ejecute el server y jwt_secret para la utilización de jsonwebtoken en la autenticación del usuario
+Creamos la base de datos:
 > sequelize db:create
 Creamos las migraciones:
 > sequelize db:migrate
 Creamos los seeders (datos de prueba para nuestra base de datos):
 > sequelize db:seed:all
+
 😊 Genial ya tenemos todo listo para poder llamar a los endpoints, ya podemos recibir y modificar datos 😊
 ## Modelo de la base de datos 🔧
 
