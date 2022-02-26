@@ -72,7 +72,7 @@ El sistema puede realizar las siguientes acciones:
 
 Para ver mas detalladamente el funcionamiento de cada endpoints consultar el siguiente enlace:
 
-https://www.getpostman.com/collections/3ab07e0e6cba3ff31074
+https://documenter.getpostman.com/view/18402582/UVkqqZXD
 
 ## Autores ✒️
 
