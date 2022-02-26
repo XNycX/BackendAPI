@@ -11,7 +11,6 @@ Necesitaremos la instalación de un programa para realizar nuestro código, en e
 
 El proyecto ha sido desarrollado utilizando los siguientes paquetes en Nodejs:
 
-* Axios
 * Bcryptjs
 * Cors
 * Dotenv
