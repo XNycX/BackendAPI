@@ -11,7 +11,6 @@ Necesitaremos la instalación de un programa para realizar nuestro código, en e
 
 El proyecto ha sido desarrollado utilizando los siguientes paquetes en Nodejs:
 
-* Axios
 * Bcryptjs
 * Cors
 * Dotenv
@@ -67,8 +66,12 @@ El sistema puede realizar las siguientes acciones:
 - Encriptación de ciertos campos mediante Bcryptjs
 - Proceso de autenticación mediante jsonwebtoken
 - El sistema permite administrar a los usuarios por roles
-- Registro mediante email de confirmación o sin email
+- Registro mediante email de confirmación o sin confirmación
 - Registrar varias peliculas a la vez a traves de array
+
+Para ver mas detalladamente el funcionamiento de cada endpoints consultar el siguiente enlace:
+
+https://documenter.getpostman.com/view/18402582/UVkqqZXD
 
 ## Autores ✒️
 
