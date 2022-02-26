@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     static associate(models) {
       this.belongsTo(models.Movie, {
+        through:models.OrderMovie,
         foreignKey: 'MovieId'
       });
       this.belongsTo(models.User, {

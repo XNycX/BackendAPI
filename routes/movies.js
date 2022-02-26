@@ -9,6 +9,7 @@ router.get('/:id', MovieController.getMovieById);
 router.get('/title/:title', MovieController.getMovieByTitle);
 router.post('/', authentication, isAdmin, MovieController.create);
 router.post('/many',authentication,isAdmin, MovieController.createMany);
+router.put('/:id', authentication, isAdmin, MovieController.update);
 router.delete('/:id',authentication,isAdmin, MovieController.deleteById);
 
 module.exports = router;

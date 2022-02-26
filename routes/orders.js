@@ -5,7 +5,7 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 
 router.post('/',authentication, OrdersController.placeNewOrder);
 router.get('/',authentication, OrdersController.getOrders);
-router.put('/', authentication, isAdmin, OrdersController.update);
+router.put('/:id', authentication, isAdmin, OrdersController.update);
 router.delete('/:id',authentication, isAdmin, OrdersController.deleteById);
 
 module.exports = router;

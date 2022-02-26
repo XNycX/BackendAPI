@@ -1,5 +1,4 @@
 const { User } = require('../models/index');
-const { Op } = require("sequelize");
 const UserController = {};
 const bcrypt = require('bcryptjs');
 const authConfig = require('../config/auth');
@@ -48,16 +47,18 @@ UserController.register = async (req, res) => {
 };
     
 UserController.registerByEmail = async (req, res) => {
+    try {
         if (/^([a-zA-Z0-9@*#]{8,15})$/.test(req.body.password) !== true) {
             return res.send("La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres.")
          }
-            try {
                 const hash = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
                 const user = await User.create({ ...req.body, password: hash, confirmed: 0, role: "user" });
+                const emailToken = jwt.sign({email:req.body.email},authConfig.secret,{expiresIn:authConfig.expires})
+                const url = 'http://localhost:3000/users/confirm/'+ emailToken
                 await transporter.sendMail({ to: req.body.email,
                     subject: "Confirme su registro en films2022",
                     html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
-                    <a href="#"> Click para confirmar tu registro</a> `,
+                    <a href="${url}"> Click para confirmar tu registro</a> `,
                   });
                 res.send(`${user.name}, Te hemos enviado un correo para confirmar el registro en la web films2022`);
             } catch (error) {
@@ -114,7 +115,6 @@ UserController.update = (req, res) => {
 
             let id = req.params.id;
             
-
             try {
                 
                 User.update(data, {
@@ -199,9 +199,8 @@ UserController.deleteAll = async (req, res) => {
 UserController.deleteById = async (req, res) => {
     let id = req.params.id
     
-    
         try {
-            const user = await User.destroy({
+            await User.destroy({
                 where: { id: id },
                 truncate: false
             })
@@ -215,8 +214,8 @@ UserController.deleteById = async (req, res) => {
 UserController.confirmEmail = async (req, res) => {
     try {
         const token = req.params.emailToken
-        const payload = jwt.verify(token,Number.parseInt(authConfig.secret))
-        const user = await User.update({confirmed:true},{
+        const payload = jwt.verify(token,authConfig.secret)
+        await User.update({confirmed:true},{
           where:{
             email: payload.email
           }

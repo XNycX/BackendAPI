@@ -1,4 +1,4 @@
-const { Genre,Actor, Movie } = require('../models/index');
+const { Genre, Movie } = require('../models/index');
 const GenreController = {};
 
 GenreController.create = (req, res) => {

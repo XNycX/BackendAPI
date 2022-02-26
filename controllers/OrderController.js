@@ -9,23 +9,21 @@ OrderController.placeNewOrder = (req,res) => {
              });
 
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 };
 
 OrderController.getOrders = (req, res) => {
     Order.findAll({
-        include: [
-            {model: Movie, as: 'Movies', through: { attributes: []}},{model: User, as: 'Users', through: {attributes: []}}
-        ]
+        include: [Movie,User]
     })
         .then(data => {
             res.send(data)
-            .catch(error=> {
-                console.log(error)
-                res.status(500).send({ message: 'Ha habido un problema al cargar los pedidos' })
-            })
-        });
+        })
+        .catch(error=> {
+            console.log(error)
+            res.status(500).send({ message: 'Ha habido un problema al cargar los pedidos' })
+        })
 };
 
 OrderController.update = (req, res) => {
@@ -51,7 +49,7 @@ OrderController.deleteById = async (req, res) => {
     let id = req.params.id;
 
     try {
-        const order = await Order.destroy({
+        await Order.destroy({
             where: { id: id },
             truncate: false
         })

@@ -2,7 +2,7 @@ const { Movie, Genre, Actor } = require('../models/index');
 const MovieController = {};
 
 MovieController.getMovies = (req, res) => {
-    //Búsqueda trayendo a todos los Movies con generos y actores
+  
     Movie.findAll({
         include: [
             {model: Genre, as: 'Genres', through: {attributes: []}},{model: Actor, as: 'Actors', through: {attributes: []}}
@@ -17,7 +17,7 @@ MovieController.getMovies = (req, res) => {
 
 
 MovieController.getMovieById = (req, res) => {
-    //Búsqueda buscando una Id
+    
     Movie.findByPk(req.params.id)
         .then(data => {
             res.send(data)
@@ -25,7 +25,7 @@ MovieController.getMovieById = (req, res) => {
 };
 
 MovieController.getMovieByTitle = (req, res) => {
-    //Búsqueda comparando un campo
+    
     Movie.findAll({
         where: {
             title: req.params.title
@@ -37,7 +37,7 @@ MovieController.getMovieByTitle = (req, res) => {
 };
 
 MovieController.getMovieByGender = (req, res) => {
-    //Búsqueda comparando un campo
+    
     Movie.findAll({
         where: {
             gender: req.params.gender
@@ -76,18 +76,31 @@ MovieController.createMany = async (req, res) => {
         catch (error) {
             res.send(error)
         }
-    };
-    
+};
+MovieController.update = (req, res) => {
+    let data = req.body;
 
+    let id = req.params.id;
 
+    try {
 
+        Movie.update(data, {
+            where: { id: id }
+        })
+            .then(updated => {
+                res.send(updated);
+            });
 
+    } catch (error) {
+        res.send(error)
+    }
+};
 
 MovieController.deleteById = async (req, res) => {
         let id = req.params.id;
     
         try {
-            const film = await Movie.destroy({
+            await Movie.destroy({
                 where: { id: id },
                 truncate: false
             })
@@ -96,7 +109,5 @@ MovieController.deleteById = async (req, res) => {
             res.send(error)
         };
 };
-// MovieController.OpinionMovie = (req, res) => {
 
-// };
 module.exports = MovieController;
