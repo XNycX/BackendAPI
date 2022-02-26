@@ -60,7 +60,7 @@ UserController.registerByEmail = async (req, res) => {
                     html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
                     <a href="${url}"> Click para confirmar tu registro</a> `,
                   });
-                res.send(`${user.name}, Te hemos enviado un correo para confirmar el registro en la web films2022`);
+                res.send(`${user.name}, Te hemos enviado un correo para confirmar el registro en la web films2022, recuerda revisar tu carpeta SPAM si no ves nuestro correo`);
             } catch (error) {
                 res.status(400).send(error);
             };
@@ -100,7 +100,7 @@ UserController.loginByEmail = (req, res) => {
             return res.status(400).send({ message: "Usuario o contraseña incorrectos" })
         }
         if(!user.confirmed){
-            return res.status(400).send({message:"Debes confirmar tu correo"})
+            return res.status(400).send({message:"Debes confirmar tu correo, recuerda revisar tu carpeta de SPAM si no ves nuestro correo de confirmación"})
         }
 
         token = jwt.sign({ id: user.id }, authConfig.secret, {
