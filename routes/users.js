@@ -9,7 +9,8 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 //CRUD RESTFUL
 router.get('/',UserController.getUsers);
 router.get('/id',authentication,UserController.getUserById);
-router.get('/email',authentication,UserController.getUserByEmail);
+router.get('/email', authentication, UserController.getUserByEmail);
+router.get('/confirm/:emailToken',UserController.confirmEmail)
 router.post('/register', UserController.register);
 router.post('/register/email',UserController.registerByEmail);
 router.post('/login', UserController.login);

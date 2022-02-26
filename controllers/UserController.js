@@ -211,4 +211,21 @@ UserController.deleteById = async (req, res) => {
         }
 };
 
+
+UserController.confirmEmail = async (req, res) => {
+    try {
+        const token = req.params.emailToken
+        const payload = jwt.verify(token,Number.parseInt(authConfig.secret))
+        const user = await User.update({confirmed:true},{
+          where:{
+            email: payload.email
+          }
+        })
+        res.status(201).send( "Usuario confirmado con exito" );
+      } catch (error) {
+        console.error(error)
+      }
+    },
+  
+
 module.exports = UserController;
