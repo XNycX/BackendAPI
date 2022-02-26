@@ -70,6 +70,10 @@ El sistema puede realizar las siguientes acciones:
 - Registro mediante email de confirmación o sin email
 - Registrar varias peliculas a la vez a traves de array
 
+Para ver mas detalladamente el funcionamiento de cada endpoints consultar el siguiente enlace:
+
+https://www.getpostman.com/collections/3ab07e0e6cba3ff31074
+
 ## Autores ✒️
 
 * **Cristian Santamaria** - *Realización del proyecto total*
