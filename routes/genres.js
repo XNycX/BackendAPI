@@ -1,5 +1,5 @@
 const express = require('express');
-const GenreController = require('../controllers/genreController');
+const GenreController = require('../config/GenreController');
 const router = express.Router();
 const { authentication, isAdmin } = require('../middleware/authentication');
 
