@@ -49,17 +49,12 @@ MovieController.getMovieByGender = (req, res) => {
 };
 
 MovieController.create = (req, res) => {
-        try {
             Movie.create({ ...req.body })
                 .then(movie => {
                     movie.addGenre(req.body.GenreId)
                     movie.addActor(req.body.ActorId)
                     res.send(movie)
-                 });
-
-        } catch (error) {
-            res.send(error);
-        }
+                 }).catch(error=>  res.send(error))
 };
 
 MovieController.createMany = async (req, res) => {
@@ -81,19 +76,17 @@ MovieController.update = (req, res) => {
     let data = req.body;
 
     let id = req.params.id;
-
-    try {
-
         Movie.update(data, {
             where: { id: id }
         })
-            .then(updated => {
-                res.send(updated);
-            });
-
-    } catch (error) {
-        res.send(error)
-    }
+            .then(() => {
+                res.send('Movie updated')
+                Movie.findByPk(req.params.id).then(movie => {
+                    movie.setGenres(req.body.GenreId)
+                    movie.setActors(req.body.ActorId)
+                }
+                    )
+            }).catch(error =>  res.send(error))
 };
 
 MovieController.deleteById = async (req, res) => {
