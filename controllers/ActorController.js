@@ -59,7 +59,7 @@ ActorController.delete = async (req, res) => {
             where: {},
             truncate: false
         })
-        res.send(`Se han eliminado los actores ${actor.name}`)
+        res.send(`Se han eliminado todos los actores `)
     } catch (error) {
         res.send(error)
     }

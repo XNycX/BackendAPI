@@ -46,7 +46,7 @@ GenreController.delete = async (req, res) => {
             where: {},
             truncate: false
         })
-        res.send(`Se han eliminado los generos ${genre.name}`)
+        res.send(`Se han eliminado todos los generos `)
     } catch (error) {
         res.send(error)
     }
