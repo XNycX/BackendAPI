@@ -81,7 +81,7 @@ MovieController.update = (req, res) => {
             where: { id: id }
         })
             .then(() => {
-                res.send('Movie updated')
+                res.send('Pelicula actualizada con éxito')
                 Movie.findByPk(req.params.id).then(movie => {
                     movie.setGenres(req.body.GenreId)
                     movie.setActors(req.body.ActorId)

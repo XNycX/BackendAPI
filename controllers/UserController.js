@@ -112,21 +112,17 @@ UserController.loginByEmail = (req, res) => {
 
 UserController.update = (req, res) => {
             let data = req.body;
-
+            if (/^([a-zA-Z0-9@*#]{8,15})$/.test(req.body.password) !== true) {
+                return res.send("La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres.")
+             }
+            const hash = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
             let id = req.params.id;
-            
-            try {
-                
-                User.update(data, {
+                User.update({...data,password:hash,confirmed: 1}, {
                     where: { id: id }
                 })
-                    .then(updated => {
-                        res.send(updated);
-                    });
-
-            } catch (error) {
-                res.send(error)
-            }
+                    .then(() => {
+                        res.send('Usario actualizado con éxito');
+                    }).catch(error => res.send(error))
 };
 
 UserController.updatePassword = (req,res) => {
