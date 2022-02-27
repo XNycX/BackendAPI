@@ -69,6 +69,7 @@ MovieController.createMany = async (req, res) => {
             movies.forEach(async movie => {
                 const movieCreated = await Movie.create({ ...movie });
                 movieCreated.addGenre(movie.GenreId);
+                movieCreated.addActor(movie.ActorId);
                 moviesResponse.push(movieCreated)
             });
             res.send('movies created')
