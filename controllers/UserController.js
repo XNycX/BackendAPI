@@ -240,7 +240,7 @@ UserController.deleteById = async (req, res) => {
   }
 };
 
-(UserController.confirmEmail = async (req, res) => {
+UserController.confirmEmail = async (req, res) => {
   try {
     const token = req.params.emailToken;
     const payload = jwt.verify(token, authConfig.secret);
@@ -256,5 +256,5 @@ UserController.deleteById = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-}),
-  (module.exports = UserController);
+},
+  module.exports = UserController;
