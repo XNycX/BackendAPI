@@ -172,18 +172,11 @@ UserController.updatePassword = (req, res) => {
     .then((usuarioFound) => {
       if (usuarioFound) {
         if (bcrypt.compareSync(oldPassword, usuarioFound.password)) {
-          //En caso de que el Password antiguo SI sea el correcto....
-
-          //1er paso..encriptamos el nuevo password....
-
+   
           newPassword = bcrypt.hashSync(
             newPassword,
             Number.parseInt(authConfig.rounds)
           );
-
-          ////////////////////////////////7
-
-          //2do paso guardamos el nuevo password en la base de datos
 
           let data = {
             password: newPassword,
