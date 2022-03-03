@@ -6,7 +6,7 @@ module.exports= {
     "password": process.env.MYSQL_PASSWORD,
     "database": process.env.MYSQL_NAME,
     "host": process.env.MYSQL_HOST,
-    "dialect": process.env.MYSQL_DIALECT
+    "dialect": process.env.MYSQL_DIALECT|| "mysql"
     },
     "test": {
       "username": "root",
@@ -20,7 +20,7 @@ module.exports= {
       "password": process.env.MYSQL_PASSWORD,
       "database": process.env.MYSQL_NAME,
       "host": process.env.MYSQL_HOST,
-      "dialect": process.env.MYSQL_DIALECT
+      "dialect": process.env.MYSQL_DIALECT || "mysql"
     }
   }
   
