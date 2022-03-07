@@ -6,7 +6,7 @@ module.exports= {
     "password": process.env.MYSQL_PASSWORD || "123456",
     "database": process.env.MYSQL_DATABASE || "films2022",
     "host": process.env.MYSQL_HOST || "127.0.0.1",
-    "dialect": process.env.MYSQL_DIALECT|| "mysql"
+    "dialect": "mysql"
     },
     "test": {
       "username": "root",
@@ -18,9 +18,9 @@ module.exports= {
     "production": {
       "username": process.env.MYSQL_USER,
       "password": process.env.MYSQL_PASSWORD,
-      "database": process.env.MYSQL_NAME,
+      "database": process.env.MYSQL_DATABASE,
       "host": process.env.MYSQL_HOST,
-      "dialect": process.env.MYSQL_DIALECT || "mysql"
+      "dialect":"mysql"
     }
   }
   
