@@ -2,7 +2,7 @@ const config = require('./config/config');
 const {Sequelize, DataTypes} = require('sequelize');
 
 const sequelize = new Sequelize(
-     config.development.database, 
+    process.env.MYSQL_DATABASE || config.development.database, 
     process.env.MYSQL_USER || config.development.username, 
     process.env.MYSQL_PASSWORD || config.development.password,
     {
