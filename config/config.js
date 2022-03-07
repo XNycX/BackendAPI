@@ -1,11 +1,11 @@
 require('dotenv').config();
 
 module.exports= {
-  "development": {
-    "username": "baba4eb5306c74",
-    "password":"e4288412",
-    "database": "heroku_c9d8601d3252c3d",
-    "host":"eu-cdbr-west-02.cleardb.net",
+    "development": {
+    "username": process.env.MYSQL_USER || "root",
+    "password": process.env.MYSQL_PASSWORD || "123456",
+    "database": process.env.MYSQL_DATABASE || "films2022",
+    "host": process.env.MYSQL_HOST || "127.0.0.1",
     "dialect": "mysql"
     },
     "test": {
@@ -16,10 +16,10 @@ module.exports= {
       "dialect": "mysql"
     },
     "production": {
-      "username": "baba4eb5306c74",
-      "password":"e4288412",
-      "database": "heroku_c9d8601d3252c3d",
-      "host":"eu-cdbr-west-02.cleardb.net",
+      "username": process.env.MYSQL_USER,
+      "password": process.env.MYSQL_PASSWORD,
+      "database": process.env.MYSQL_DATABASE,
+      "host": process.env.MYSQL_HOST,
       "dialect":"mysql"
     }
   }
