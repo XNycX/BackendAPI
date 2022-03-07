@@ -15,7 +15,7 @@ let corsOptions = {//CONFIGURO OPCIONES DE CORS
 //Middleware
 app.use(express.json()); //PUEDO OBTENER JSON DEL BODY
 app.use(cors(corsOptions));  //USO CORS
-
+app.get('/', (req, res) => {res.send('Bienvenidos a Express');});
 app.use(router);
 
 db.then(() => {
