@@ -100,7 +100,7 @@ UserController.registerByEmail = async (req, res) => {
     token = jwt.sign({ id: user.id }, authConfig.secret, {
       expiresIn: authConfig.expires,
     });
-    res.send({ message: `Bienvenid@ ${user.name}`,token ,username:user.name});
+    res.send({ message: `Bienvenid@ ${user.name}`,token ,user});
   });
 }),
   (UserController.loginByEmail = (req, res) => {
