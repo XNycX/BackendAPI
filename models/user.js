@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    surname: DataTypes.STRING,
     city: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
@@ -35,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: DataTypes.STRING,
     telephone: DataTypes.INTEGER,
+    dni: DataTypes.STRING,
     role: DataTypes.STRING,
     confirmed: DataTypes.BOOLEAN
   }, {
