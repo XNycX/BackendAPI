@@ -13,6 +13,8 @@ module.exports = {
       },
       overview: {
         type: Sequelize.STRING
+      },price: {
+        type: Sequelize.INTEGER
       },
       popularity: {
         type: Sequelize.FLOAT
