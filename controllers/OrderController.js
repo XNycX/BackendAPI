@@ -4,6 +4,7 @@ const OrderController = {};
 OrderController.placeNewOrder = (req, res) => {
   Order.create({
     ...req.body,
+    UserId:req.user.id
   })
     .then((order) => {
       res.send(order);
