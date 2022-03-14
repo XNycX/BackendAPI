@@ -1,4 +1,4 @@
-const { User , Order} = require("../models/index");
+const { User , Order,Movie} = require("../models/index");
 const UserController = {};
 const bcrypt = require("bcryptjs");
 const authConfig = require("../config/auth");
@@ -12,7 +12,8 @@ UserController.getUsers = (req, res) => {
 };
 
 UserController.getUserById = (req, res) => {
-  User.findByPk(req.user.id,{include: Order}).then((data) => {
+  User.findByPk(req.user.id,{include: [{ model : Order,       
+   include: [Movie]}],}).then((data) => {
     res.send(data);
   });
 };
