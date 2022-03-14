@@ -1,4 +1,4 @@
-const { User } = require("../models/index");
+const { User , Order} = require("../models/index");
 const UserController = {};
 const bcrypt = require("bcryptjs");
 const authConfig = require("../config/auth");
@@ -12,7 +12,7 @@ UserController.getUsers = (req, res) => {
 };
 
 UserController.getUserById = (req, res) => {
-  User.findByPk(req.params.id).then((data) => {
+  User.findByPk(req.user.id,{include: Order}).then((data) => {
     res.send(data);
   });
 };
