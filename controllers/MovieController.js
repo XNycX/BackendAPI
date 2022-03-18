@@ -108,13 +108,13 @@ MovieController.update = (req, res) => {
 MovieController.deleteById = async (req, res) => {
   let id = req.params.id;
   try {
-    await Movie.destroy({
+   await Movie.destroy({
       where: {
         id: id,
       },
       truncate: false,
     });
-    res.send(`Se ha eliminado la pelicula ${id}`);
+    res.send({message:`Se ha eliminado la pelicula ${id}`,id});
   } catch (error) {
     res.send(error);
   }

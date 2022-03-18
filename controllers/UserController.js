@@ -225,13 +225,12 @@ UserController.deleteAll = async (req, res) => {
 
 UserController.deleteById = async (req, res) => {
   let id = req.params.id;
-
   try {
     await User.destroy({
       where: { id: id },
       truncate: false,
     });
-    res.send(`Se ha eliminado la id de usuario ${id}`);
+    res.send({message:`Se ha eliminado el usuario ${id}`,id});
   } catch (error) {
     res.send(error);
   }

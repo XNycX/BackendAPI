@@ -51,7 +51,7 @@ OrderController.deleteById = async (req, res) => {
       },
       truncate: false,
     });
-    res.send(`Se ha eliminado el pedido ${id}`);
+    res.send({message:`Se ha eliminado el pedido ${id}`,id});
   } catch (error) {
     res.send(error);
   }
