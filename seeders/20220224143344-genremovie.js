@@ -5,13 +5,13 @@ module.exports = {
    
   
     await queryInterface.bulkInsert('genremovies', [
-      {"GenreId":1,"MovieId":1,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
-      {"GenreId":3,"MovieId":1,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
-      {"GenreId":2,"MovieId":2,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
-      {"GenreId":4,"MovieId":3,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
-      {"GenreId":5,"MovieId":4,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
-      {"GenreId":6,"MovieId":5,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
-      {"GenreId":7,"MovieId":5,"createdAt":"2021-02-24","updatedAt":"2021-02-26"}
+      {"GenreId":11,"MovieId":11,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
+      {"GenreId":31,"MovieId":11,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
+      {"GenreId":21,"MovieId":21,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
+      {"GenreId":41,"MovieId":31,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
+      {"GenreId":51,"MovieId":41,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
+      {"GenreId":61,"MovieId":51,"createdAt":"2021-02-24","updatedAt":"2021-02-26"},
+      {"GenreId":71,"MovieId":51,"createdAt":"2021-02-24","updatedAt":"2021-02-26"}
       ], {});
     
   },

@@ -5,7 +5,11 @@ module.exports = {
     
    
       await queryInterface.bulkInsert('orders', [
-        {"movieId":1,"userId":1,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",},{"movieId":2,"userId":2,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",},{"movieId":3,"userId":3,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",},{"movieId":4,"userId":4,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",},{"movieId":5,"userId":5,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",}
+        {"movieId":11,"userId":11,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",}
+        ,{"movieId":12,"userId":12,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",}
+        ,{"movieId":13,"userId":13,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",}
+        ,{"movieId":14,"userId":14,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",}
+        ,{"movieId":15,"userId":15,"date_rent":"2021-02-24","date_return":"2021-02-27","createdAt":"2021-02-24","updatedAt":"2021-02-25",}
       ], {});
     
   },
