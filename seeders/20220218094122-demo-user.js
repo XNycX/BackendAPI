@@ -21,7 +21,7 @@ await queryInterface.bulkInsert('users', [
 
       async down(queryInterface, Sequelize) {
      
-       await queryInterface.bulkDelete('People', null, {});
+       await queryInterface.bulkDelete('users', null, {});
          
       }
       }
