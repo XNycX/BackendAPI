@@ -12,6 +12,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      surname: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       city: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -27,6 +31,10 @@ module.exports = {
       },
       telephone: {
         type: Sequelize.INTEGER
+      },
+      dni: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       role: {
         type: Sequelize.STRING,

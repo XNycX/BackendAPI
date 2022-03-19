@@ -1,5 +1,7 @@
 const { Movie, Genre, Actor } = require("../models/index");
 const MovieController = {};
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 (MovieController.getMovies = (req, res) => {
   Movie.findAll({
@@ -37,7 +39,9 @@ const MovieController = {};
 MovieController.getMovieByTitle = (req, res) => {
   Movie.findAll({
     where: {
-      title: req.params.title,
+      title: {
+        [Op.like]: `%${req.params.title}%`,
+      },
     },
   }).then((data) => {
     res.send(data);
@@ -104,13 +108,13 @@ MovieController.update = (req, res) => {
 MovieController.deleteById = async (req, res) => {
   let id = req.params.id;
   try {
-    await Movie.destroy({
+   await Movie.destroy({
       where: {
         id: id,
       },
       truncate: false,
     });
-    res.send(`Se ha eliminado la pelicula ${id}`);
+    res.send({message:`Se ha eliminado la pelicula ${id}`,id});
   } catch (error) {
     res.send(error);
   }

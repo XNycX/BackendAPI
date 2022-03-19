@@ -1,4 +1,4 @@
-const { User } = require("../models/index");
+const { User , Order,Movie} = require("../models/index");
 const UserController = {};
 const bcrypt = require("bcryptjs");
 const authConfig = require("../config/auth");
@@ -12,7 +12,8 @@ UserController.getUsers = (req, res) => {
 };
 
 UserController.getUserById = (req, res) => {
-  User.findByPk(req.params.id).then((data) => {
+  User.findByPk(req.user.id,{include: [{ model : Order,       
+   include: [Movie]}],}).then((data) => {
     res.send(data);
   });
 };
@@ -100,7 +101,7 @@ UserController.registerByEmail = async (req, res) => {
     token = jwt.sign({ id: user.id }, authConfig.secret, {
       expiresIn: authConfig.expires,
     });
-    res.send({ message: `Bienvenid@ ${user.name}, tu token es: ${token}` });
+    res.send({ message: `Bienvenid@ ${user.name}`, token, user });
   });
 }),
   (UserController.loginByEmail = (req, res) => {
@@ -121,12 +122,10 @@ UserController.registerByEmail = async (req, res) => {
           .send({ message: "Usuario o contraseña incorrectos" });
       }
       if (!user.confirmed) {
-        return res
-          .status(400)
-          .send({
-            message:
-              "Debes confirmar tu correo, recuerda revisar tu carpeta de SPAM si no ves nuestro correo de confirmación",
-          });
+        return res.status(400).send({
+          message:
+            "Debes confirmar tu correo, recuerda revisar tu carpeta de SPAM si no ves nuestro correo de confirmación",
+        });
       }
 
       token = jwt.sign({ id: user.id }, authConfig.secret, {
@@ -135,28 +134,26 @@ UserController.registerByEmail = async (req, res) => {
       res.send({ message: `Bienvenid@ ${user.name}, tu token es: ${token}` });
     });
   }),
-  (UserController.update = (req, res) => {
-    let data = req.body;
-    if (/^([a-zA-Z0-9@*#]{8,15})$/.test(req.body.password) !== true) {
-      return res.send(
-        "La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres."
-      );
-    }
-    const hash = bcrypt.hashSync(
-      req.body.password,
-      Number.parseInt(authConfig.rounds)
-    );
-    let id = req.params.id;
-    User.update(
-      { ...data, password: hash, confirmed: 1 },
-      {
-        where: { id: id },
+  (UserController.update = async (req, res) => {
+    try {
+      let data = req.body;
+      if (/^([a-zA-Z0-9@*#]{8,15})$/.test(req.body.password) !== true) {
+        return res.send(
+          "La contraseña debe tener al menos 8 caracteres y no más de 15 caracteres."
+        );
       }
-    )
-      .then(() => {
-        res.send("Usario actualizado con éxito");
-      })
-      .catch((error) => res.send(error));
+      let id = req.params.id;
+      await User.update(
+        { ...data, confirmed: 1 },
+        {
+          where: { id: id },
+        }
+      );
+      const user = await User.findByPk(req.params.id);
+      res.send({ message: "Usario actualizado con éxito", user });
+    } catch (error) {
+      res.send(error);
+    }
   });
 
 UserController.updatePassword = (req, res) => {
@@ -221,19 +218,18 @@ UserController.deleteAll = async (req, res) => {
 
 UserController.deleteById = async (req, res) => {
   let id = req.params.id;
-
   try {
     await User.destroy({
       where: { id: id },
       truncate: false,
     });
-    res.send(`Se ha eliminado la id de usuario ${id}`);
+    res.send({message:`Se ha eliminado el usuario ${id}`,id});
   } catch (error) {
     res.send(error);
   }
 };
 
-UserController.confirmEmail = async (req, res) => {
+(UserController.confirmEmail = async (req, res) => {
   try {
     const token = req.params.emailToken;
     const payload = jwt.verify(token, authConfig.secret);
@@ -249,5 +245,5 @@ UserController.confirmEmail = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-},
-  module.exports = UserController;
+}),
+  (module.exports = UserController);
