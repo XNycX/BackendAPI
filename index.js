@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors');
 const PORT = process.env.PORT || 5500;
 const router = require('./router');
-const db = require('./db.js');
 
 let corsOptions = {//CONFIGURO OPCIONES DE CORS
     origin: "*",
@@ -18,6 +17,4 @@ app.use(cors(corsOptions));  //USO CORS
 app.get('/', (req, res) => {res.send('Bienvenidos a Express');});
 app.use(router);
 
-db.then(() => {
-    app.listen(process.env.PORT|| 5500, () => console.log(`Server on port ${PORT}`)); //Conectado a la base de datos
-}).catch((err) => console.log(err.message));  
+app.listen(process.env.PORT|| 5500, () => console.log(`Server on port ${PORT}`));
