@@ -17,6 +17,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
+      price: Sequelize.FLOAT,
       MovieId: {
         type: Sequelize.INTEGER,
         references: {
